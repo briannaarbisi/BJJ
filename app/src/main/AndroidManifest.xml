@@ -27,6 +27,17 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="team5.bjj.Home" />
         </activity>
+        <activity
+            android:name=".StrategizeActivity"
+            android:label="@string/title_activity_strategize" />
+        <activity
+            android:name=".AddCustomStrategyActivity"
+            android:label="@string/title_activity_add_custom_strategy"
+            android:parentActivityName=".Home">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="team5.bjj.Home" />
+        </activity>
     </application>
 
 </manifest>

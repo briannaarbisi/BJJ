@@ -5,10 +5,21 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="team5.bjj.Home">
+    tools:context="team5.bjj.StrategizeActivity">
+
+    <TextView
+        android:id="@+id/message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="@string/title_home"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.design.widget.BottomNavigationView
-        android:id="@+id/settings_edit"
+        android:id="@+id/settings_home"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="?android:attr/windowBackground"
@@ -18,33 +29,18 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/settings_edit_navigation">
-
-    </android.support.design.widget.BottomNavigationView>
-
-    <ListView
-        android:id="@+id/home_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:menu="@menu/settings_home_navigation"/>
 
     <android.support.design.widget.BottomNavigationView
-        android:id="@+id/search_new_strategy_eval"
+        android:id="@+id/strategize_navigation_id"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="0dp"
+        android:layout_marginStart="0dp"
         android:background="?android:attr/windowBackground"
-        android:touchscreenBlocksFocus="false"
-        android:transitionGroup="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/home_navigation" >
-
-    </android.support.design.widget.BottomNavigationView>
-
+        app:menu="@menu/strategize_navigation" />
 
 </android.support.constraint.ConstraintLayout>

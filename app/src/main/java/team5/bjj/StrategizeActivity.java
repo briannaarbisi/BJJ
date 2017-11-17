@@ -1,6 +1,5 @@
 package team5.bjj;
 
-import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,12 +8,9 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.ListView;
-import android.widget.ArrayAdapter;
 
-public class Home extends AppCompatActivity {
+public class StrategizeActivity extends AppCompatActivity {
 
-    //ListView temp = new android.widget.ListView(Home.this);
     //private TextView mTextMessage;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -23,25 +19,19 @@ public class Home extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.navigation_search:
-                    Intent intent_search = new Intent(Home.this,SearchActivity.class);
-                    startActivity(intent_search);
+                case R.id.strategize_navigation_delete:
+                    //mTextMessage.setText(R.string.title_home);
                     return true;
-                case R.id.navigation_new_strategy:
-                    Intent intent_new_strategy = new Intent(Home.this,AddCustomStrategyActivity.class);
-                    startActivity(intent_new_strategy);
+                case R.id.strategize_navigation_add_position:
+                    //mTextMessage.setText(R.string.title_dashboard);
+                    return true;
+                case R.id.strategize_navigation_custom_move:
+                    //TextMessage.setText(R.string.title_notifications);
+                    return true;
+                case R.id.navigation_settings_search:
+                    return true;
 
-                    return true;
-                case R.id.navigation_eval:
-                    //mTextMessage.setText(R.string.title_eval);
-                    return true;
-
-                case R.id.navigation_settings:
-                    // mTextMessage.setText(R.string.title_new_strategy);
-
-                    return true;
-                case R.id.navigation_edit:
-                    //mTextMessage.setText(R.string.title_eval);
+                case R.id.navigation_home:
                     return true;
             }
             return false;
@@ -50,27 +40,18 @@ public class Home extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_strategize);
 
-        BottomNavigationView TopNavigation = (BottomNavigationView) findViewById(R.id.settings_edit);
+        BottomNavigationView TopNavigation = (BottomNavigationView) findViewById(R.id.settings_home);
         changeMenuItemCheckedStateColor(TopNavigation, "#999999", "#999999");
         TopNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        BottomNavigationView BottomNavigation = (BottomNavigationView) findViewById(R.id.search_new_strategy_eval);
+
+        //mTextMessage = (TextView) findViewById(R.id.message);
+        BottomNavigationView BottomNavigation = (BottomNavigationView) findViewById(R.id.strategize_navigation_id);
         changeMenuItemCheckedStateColor(BottomNavigation, "#999999", "#999999");
         BottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-        String[] args = {"Default Offensive", "Default Defensive", "My First Offensive"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this,
-                R.layout.list_items,
-                R.id.textView,
-                args);
-
-        ListView list = (ListView) findViewById(R.id.home_list);
-        list.setAdapter(adapter);
     }
 
     private void changeMenuItemCheckedStateColor(BottomNavigationView bottomNavigationView, String checkedColorHex, String uncheckedColorHex) {
