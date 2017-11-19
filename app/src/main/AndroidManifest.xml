@@ -11,12 +11,31 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Home"
-            android:label="@string/app_name">
+            android:label="@string/title_home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".SearchActivity"
+            android:label="@string/title_activity_search"
+            android:parentActivityName=".Home">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="team5.bjj.Home" />
+        </activity>
+        <activity
+            android:name=".StrategizeActivity"
+            android:label="@string/title_activity_strategize" />
+        <activity
+            android:name=".AddCustomStrategyActivity"
+            android:label="@string/title_activity_add_custom_strategy"
+            android:parentActivityName=".Home">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="team5.bjj.Home" />
         </activity>
     </application>
 

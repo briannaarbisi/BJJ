@@ -5,23 +5,25 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="team5.bjj.Home">
+    tools:context="team5.bjj.SearchActivity">
 
     <android.support.design.widget.BottomNavigationView
-        android:id="@+id/settings_edit"
+        android:id="@+id/settings_home"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="?android:attr/windowBackground"
         android:touchscreenBlocksFocus="false"
         android:transitionGroup="false"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/settings_edit_navigation" />
+        app:menu="@menu/settings_home_navigation">
+
+    </android.support.design.widget.BottomNavigationView>
 
     <ListView
-        android:id="@+id/home_list"
+        android:id="@+id/position_move_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toTopOf="parent"
@@ -30,7 +32,7 @@
         app:layout_constraintRight_toRightOf="parent" />
 
     <android.support.design.widget.BottomNavigationView
-        android:id="@+id/search_new_strategy_eval"
+        android:id="@+id/custom_position_custom_move"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="?android:attr/windowBackground"
@@ -40,6 +42,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/home_navigation" />
+        app:menu="@menu/search_navigation" />
 
 </android.support.constraint.ConstraintLayout>
