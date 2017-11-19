@@ -1,5 +1,6 @@
 package team5.bjj;
 
+import android.app.ActionBar;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ public class AddCustomStrategyActivity extends AppCompatActivity {
                  //   return true;
                 case R.id.navigation_cancel:
                     //mTextMessage.setText(R.string.title_dashboard);
+                    onBackPressed();
                     return true;
                 case R.id.navigation_create:
                     //mTextMessage.setText(R.string.title_notifications);
@@ -37,6 +39,12 @@ public class AddCustomStrategyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_custom_strategy);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setHomeButtonEnabled(false); // disable the button
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false); // remove the left caret
+            getSupportActionBar().setDisplayShowHomeEnabled(false); // remove the icon
+        }
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.cancel_create);

@@ -34,8 +34,6 @@ public class SearchActivity extends AppCompatActivity {
                     return true;
 
                 case R.id.navigation_settings_search:
-
-
                     return true;
 
                 case R.id.navigation_home:
@@ -59,6 +57,12 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setHomeButtonEnabled(false); // disable the button
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false); // remove the left caret
+            getSupportActionBar().setDisplayShowHomeEnabled(false); // remove the icon
+        }
 
         BottomNavigationView TopNavigation = (BottomNavigationView) findViewById(R.id.settings_home);
         changeMenuItemCheckedStateColor(TopNavigation, "#999999", "#999999");
