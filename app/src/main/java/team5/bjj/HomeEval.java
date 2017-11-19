@@ -8,11 +8,14 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
 
-public class Home extends AppCompatActivity {
+/**
+ * Created by b on 11/18/17.
+ */
+
+public class HomeEval extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -21,26 +24,19 @@ public class Home extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_search:
-                    Intent intent_search = new Intent(Home.this,SearchActivity.class);
-                    startActivity(intent_search);
                     return true;
 
                 case R.id.navigation_new_strategy:
-                    Intent intent_new_strategy = new Intent(Home.this,AddCustomStrategyActivity.class);
-                    startActivity(intent_new_strategy);
                     return true;
 
-                case R.id.navigation_eval:
-                    Intent intent_eval = new Intent(Home.this,HomeEval.class);
-                    startActivity(intent_eval);
+                case R.id.navigation_cancel:
+                    onBackPressed();
                     return true;
 
                 case R.id.navigation_settings:
-                    // mTextMessage.setText(R.string.title_new_strategy);
-
                     return true;
+
                 case R.id.navigation_edit:
-                    //mTextMessage.setText(R.string.title_eval);
                     return true;
             }
             return false;
