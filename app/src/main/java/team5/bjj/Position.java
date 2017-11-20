@@ -9,8 +9,6 @@ import java.util.ArrayList;
 public class Position {
     private ArrayList<Move> entireListOfMoves;  // Contains the set of moves categorized with this position
     private String name;
-    //private ArrayList< ArrayList<Move> > strategyMoves;
-    // Need a way to be able to show different lists of moves for a specific position in different strategies
 
     public Position(String name) {
         this.name = name;
