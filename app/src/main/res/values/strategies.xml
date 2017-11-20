@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="name">Default</string>
+    <string name="description">As simple as it gets.</string>
+
+    <item type="id" name="standing">
+        <item type="move" name="Arm Bar"></item>
+        <item type="move" name="Ezekiel Choke"></item>
+        <item type="move" name="Guillotine"></item>
+    </item>
+
+    <item type="id" name="bottom_gaurd">
+        <item type="move" name="Scissor"></item>
+        <item type="move" name="triangle"></item>
+    </item>
+</resources>
