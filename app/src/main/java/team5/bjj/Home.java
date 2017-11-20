@@ -7,10 +7,30 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Xml;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import static java.lang.System.in;
+
 
 public class Home extends AppCompatActivity {
 
@@ -62,6 +82,32 @@ public class Home extends AppCompatActivity {
         BottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         String[] args = {"Default Offensive", "Default Defensive", "My First Offensive"};
+
+
+        //XML Parser Goes Here
+        try {
+            InputStream is = getAssets().open("./res/values/strategies.xml");
+
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(is);
+
+            Element element=doc.getDocumentElement();
+            element.normalize();
+
+            //NodeList nList = doc.getElementsByTagName("employee");
+            NodeList nList = doc.getElementsByTagName("strategy");
+
+            for (int i=0; i<nList.getLength(); i++) {
+
+                Node node = nList.item(i);
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
+                    args[i] = node.getTextContent();
+                }
+            }
+
+        } catch (Exception e) {e.printStackTrace();}
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this,
                 R.layout.list_items,

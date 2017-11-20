@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <strategy type = "id" name="Default">
-        <string name="name">Default</string>
-        <string name="description">As simple as it gets.</string>
-        <position>
-            Standing
-            <move>Single</move>
-            <move>Double</move>
-        </position>
-        <position>
-            Top Guard
-            <move>Knee Slicer</move>
-            <move>Standing Guard Break</move>
-        </position>
-    </strategy>
-
-    <!--<item type = "id" name="Strategy2">-->
-        <!--<string name="name">DefaultOffensive</string>-->
+    <!--<strategy type = "id" name="Default">-->
+        <!--<string name="name">Default</string>-->
         <!--<string name="description">As simple as it gets.</string>-->
+        <!--<position>-->
+            <!--Standing-->
+            <!--<move>Single</move>-->
+            <!--<move>Double</move>-->
+        <!--</position>-->
+        <!--<position>-->
+            <!--Top Guard-->
+            <!--<move>Knee Slicer</move>-->
+            <!--<move>Standing Guard Break</move>-->
+        <!--</position>-->
+    <!--</strategy>-->
 
-        <!--<item type="id" name="standing">-->
-            <!--<item type="move" name="Single"></item>-->
-            <!--<item type="move" name="Double"></item>-->
-            <!--<item type="move" name="Guillotine"></item>-->
-        <!--</item>-->
+    <item type = "id" name="Strategy2">
+        <string name="name">DefaultOffensive</string>
+        <string name="description">As simple as it gets.</string>
 
-        <!--<item type="id" name="top_gaurd">-->
-            <!--<item type="move" name="Knee Slice"></item>-->
-            <!--<item type="move" name="Standing Guard Break"></item>-->
-        <!--</item>-->
-    <!--</item>-->
+        <item type="id" name="standing">
+            <item type="move" name="Single"></item>
+            <item type="move" name="Double"></item>
+            <item type="move" name="Guillotine"></item>
+        </item>
+
+        <item type="id" name="top_gaurd">
+            <item type="move" name="Knee Slice"></item>
+            <item type="move" name="Standing Guard Break"></item>
+        </item>
+    </item>
 </resources>
