@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * Created by cindywood on 11/16/17.
+ * Created by Hannah on 11/16/17.
  */
 
 public class Strategy {
