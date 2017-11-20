@@ -12,12 +12,14 @@ public class Strategy {
     private Date creationDate;
     private Date latestModificationDate;
     private ArrayList<Position> positions;
+    private ArrayList< ArrayList<Move> > moves;
 
     public Strategy(String name, Date date) {
         this.name = name;
         this.creationDate = date;
         this.latestModificationDate = date;
         this.positions = new ArrayList<Position>();
+        this.moves = new ArrayList< ArrayList<Move> >();
     }
 
     /* Getters and Setters */
@@ -45,9 +47,25 @@ public class Strategy {
     }
     public void addPosition(Position p) {
         this.positions.add(p);
+        this.moves.add(new ArrayList<Move>());
     }
     public void removePosition(Position p) {
-        this.positions.remove(p);
+        int index = this.positions.indexOf(p);
+        this.positions.remove(index);
+        this.moves.remove(index);
     }
 
+    public ArrayList<Move> getMoves(Position p) {
+        // Get the index of the Position to use to get its corresponding list of moves
+        int index = this.positions.indexOf(p);
+        return this.moves.get(index);
+    }
+    public void addMove(Position p, Move m) {
+        int index = this.positions.indexOf(p);
+        this.moves.get(index).add(m);
+    }
+    public void removeMove(Position p, Move m) {
+        int index = this.positions.indexOf(p);
+        this.moves.get(index).remove(m);
+    }
 }
