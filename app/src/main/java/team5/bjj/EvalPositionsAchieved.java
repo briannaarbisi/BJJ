@@ -46,7 +46,7 @@ public class EvalPositionsAchieved extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_eval_positions_achieved);
 
         BottomNavigationView TopNavigation = (BottomNavigationView) findViewById(R.id.settings_edit);
         changeMenuItemCheckedStateColor(TopNavigation, "#999999", "#999999");
@@ -63,7 +63,7 @@ public class EvalPositionsAchieved extends AppCompatActivity {
                 R.id.textView,
                 args);
 
-        ListView list = (ListView) findViewById(R.id.home_list);
+        ListView list = (ListView) findViewById(R.id.attempt_list);
         list.setAdapter(adapter);
     }
 

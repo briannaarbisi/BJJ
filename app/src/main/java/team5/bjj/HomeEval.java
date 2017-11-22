@@ -8,8 +8,20 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import java.io.InputStream;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 /**
  * Created by b on 11/18/17.
@@ -58,14 +70,60 @@ public class HomeEval extends AppCompatActivity {
         BottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         String[] args = {"Default Offensive", "Default Defensive", "My First Offensive"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+
+        try {
+            InputStream is = getAssets().open("strategies.xml");
+
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(is);
+
+            Element element=doc.getDocumentElement();
+            element.normalize();
+
+            NodeList nList = doc.getElementsByTagName("string");
+            int temp = nList.getLength();
+
+            for (int i=0; i<nList.getLength(); i++) {
+                Node node = nList.item(0);
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
+                    args[i] = node.getTextContent();
+                    ListView listview = (ListView) findViewById(R.id.home_list);
+
+                    listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            //Object listItem = listview.getItemAtPosition(position);
+                            Intent intent_eval_attempted = new Intent(HomeEval.this, EvalPositionsAchieved.class);
+                            view.getContext().startActivity(intent_eval_attempted);
+                            //startActivity(intent_eval_attempted);
+                        }
+                    });
+
+
+                }
+            }
+
+
+        } catch (Exception e) {e.printStackTrace();}
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                    this,
+                    R.layout.list_items,
+                    R.id.textView,
+                    args);
+
+            ListView list = (ListView) findViewById(R.id.home_list);
+            list.setAdapter(adapter);
+
+        /*ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this,
                 R.layout.list_items,
                 R.id.textView,
                 args);
 
         ListView list = (ListView) findViewById(R.id.home_list);
-        list.setAdapter(adapter);
+        list.setAdapter(adapter);*/
     }
 
     private void changeMenuItemCheckedStateColor(BottomNavigationView bottomNavigationView, String checkedColorHex, String uncheckedColorHex) {
