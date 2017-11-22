@@ -27,6 +27,7 @@ import java.nio.file.Paths;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -92,6 +93,10 @@ public class Home extends AppCompatActivity {
         BottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         String[] args = {"Default Offensive", "Default Defensive", "My First Offensive"};
+
+        List<String> argsList = new ArrayList<String>();
+
+        Collections.addAll(argsList, args);
 
         //ListView tv = findViewById(R.id.home_list);
 
@@ -163,16 +168,19 @@ public class Home extends AppCompatActivity {
 
         } catch (Exception e) {e.printStackTrace();}
 
+        Collections.addAll(argsList, args);
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this,
                 R.layout.list_items,
                 R.id.textView,
-                args);
+                argsList);
 
         ListView list = (ListView) findViewById(R.id.home_list);
         list.setAdapter(adapter);
 
-
+        argsList.add("Adding a new strategy");
+        adapter.notifyDataSetChanged();
     }
 
     /*@Override
