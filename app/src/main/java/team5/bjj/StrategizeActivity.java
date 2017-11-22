@@ -7,11 +7,30 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
+import android.util.DisplayMetrics;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnChildClickListener;
+import android.widget.ExpandableListView.OnGroupClickListener;
+import android.widget.ExpandableListView.OnGroupCollapseListener;
+import android.widget.ExpandableListView.OnGroupExpandListener;
+import android.widget.Toast;
 
 public class StrategizeActivity extends AppCompatActivity {
 
     //private TextView mTextMessage;
+
+    ExpandableListAdapter listAdapter;
+    ExpandableListView expListView;
+    List<String> listDataHeader;
+    HashMap<String, List<String>> listDataChild;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -52,6 +71,14 @@ public class StrategizeActivity extends AppCompatActivity {
         BottomNavigationView BottomNavigation = (BottomNavigationView) findViewById(R.id.strategize_navigation_id);
         changeMenuItemCheckedStateColor(BottomNavigation, "#999999", "#999999");
         BottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        int width = metrics.widthPixels;
+
+        ExpandableListView mExpandableList = (ExpandableListView)findViewById(R.id.expandable_list);
+        mExpandableList.setIndicatorBounds(width - GetPixelFromDips(50), width - GetPixelFromDips(10));
+
     }
 
     private void changeMenuItemCheckedStateColor(BottomNavigationView bottomNavigationView, String checkedColorHex, String uncheckedColorHex) {
@@ -74,6 +101,13 @@ public class StrategizeActivity extends AppCompatActivity {
         bottomNavigationView.setItemTextColor(colorStateList);
         bottomNavigationView.setItemIconTintList(colorStateList);
 
+    }
+
+    public int GetPixelFromDips(float pixels) {
+        // Get the screen's density scale
+        final float scale = getResources().getDisplayMetrics().density;
+        // Convert the dps to pixels, based on density scale
+        return (int) (pixels * scale + 0.5f);
     }
 
 }

@@ -18,6 +18,22 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--<ListView
+        android:id="@+id/strategy_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" /> -->
+
+    <ExpandableListView
+        android:id="@+id/expandable_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:groupIndicator="@drawable/settings_selector"
+        android:transcriptMode="alwaysScroll" />
+
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/settings_home"
         android:layout_width="0dp"

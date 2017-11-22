@@ -9,6 +9,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Xml;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
@@ -33,6 +34,13 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import static java.lang.System.in;
 
+import android.view.View;
+import android.view.Menu;
+
+import android.app.Activity;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class Home extends AppCompatActivity {
 
@@ -85,6 +93,16 @@ public class Home extends AppCompatActivity {
 
         String[] args = {"Default Offensive", "Default Defensive", "My First Offensive"};
 
+        //ListView tv = findViewById(R.id.home_list);
+
+        ///tv.setOnClickListener(new View.OnClickListener() {
+         ///   @Override
+            //public void onClick(View v) {
+            //    Intent intent_strategize = new Intent(Home.this,StrategizeActivity.class);
+           //     startActivity(intent_strategize);
+           // }
+       /// });
+
 
         //XML Parser Goes Here
         try {
@@ -111,8 +129,37 @@ public class Home extends AppCompatActivity {
                 Node node = nList.item(0);
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     args[i] = node.getTextContent();
+                    ListView listview = (ListView) findViewById(R.id.home_list);
+
+                    listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            //Object listItem = listview.getItemAtPosition(position);
+                            Intent intent_strategize = new Intent(Home.this, StrategizeActivity.class);
+                            startActivity(intent_strategize);
+                        }
+                    });
+
+
                 }
-            }
+
+
+
+
+                    /*tv.setOnClickListener(new OnItemClickListener(){
+                        @Override
+                    public void onItemClick(AdapterView<?> parent)  {
+                        Intent intent_strategize = new Intent(Home.this,StrategizeActivity.class);
+                        startActivity(intent_strategize);
+                     }
+                     }); */
+                    //AdapterView tempview = AdapterView.newInstance();
+                    //listview.setOnItemClickListener(AdapterView tempview = (AdapterView)OnItemClickListener(){
+                    //    @Override
+                   //     public void onItemClick(AdapterView<?> parent)});
+                   // }
+                }
+
 
         } catch (Exception e) {e.printStackTrace();}
 
@@ -124,7 +171,16 @@ public class Home extends AppCompatActivity {
 
         ListView list = (ListView) findViewById(R.id.home_list);
         list.setAdapter(adapter);
+
+
     }
+
+    /*@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_home, menu);
+        return true;
+    }*/
+
 
     private void changeMenuItemCheckedStateColor(BottomNavigationView bottomNavigationView, String checkedColorHex, String uncheckedColorHex) {
         int checkedColor = Color.parseColor(checkedColorHex);
@@ -147,5 +203,6 @@ public class Home extends AppCompatActivity {
         bottomNavigationView.setItemIconTintList(colorStateList);
 
     }
+
 
 }
