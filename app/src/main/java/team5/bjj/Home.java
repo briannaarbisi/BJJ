@@ -20,6 +20,8 @@ import org.w3c.dom.NodeList;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -86,7 +88,13 @@ public class Home extends AppCompatActivity {
 
         //XML Parser Goes Here
         try {
-            InputStream is = getAssets().open("./res/values/strategies.xml");
+            //AssetManager assetManager = getResources().getAssets();
+
+            //String tempDir = System.getProperty("user.dir");
+            //String myFile = getFileStreamPath("strategies.xml");
+            //InputStream is = (InputStream) getResources().getAssets().open(R.id.Strategy2);
+            //InputStream is = getAssets().open("/Users/PEFO/Documents/5115/JiuJitsuAppProject/BJJRepo/app/src/main/res/values/strategies.xml");
+            InputStream is = getAssets().open("strategies.xml");
 
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -96,11 +104,11 @@ public class Home extends AppCompatActivity {
             element.normalize();
 
             //NodeList nList = doc.getElementsByTagName("employee");
-            NodeList nList = doc.getElementsByTagName("strategy");
+            NodeList nList = doc.getElementsByTagName("string");
+            int temp = nList.getLength();
 
             for (int i=0; i<nList.getLength(); i++) {
-
-                Node node = nList.item(i);
+                Node node = nList.item(0);
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     args[i] = node.getTextContent();
                 }
