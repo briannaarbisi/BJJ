@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<assets>
+    <item type = "id" name="PositionsList">
+        <string name="Position"> Standing</string>
+        <string name="Position"> Top Guard</string>
+        <string name="Position"> Bottom Guard - Closed</string>
+        <string name="Position"> Bottom Guard - X</string>
+        <string name="Position"> Bottom Guard - Open</string>
+        <string name="Position"> Bottom Guard - Spider</string>
+        <string name="Position"> Bottom Guard - Butterfly</string>
+        <string name="Position"> Side Control</string>
+        <string name="Position"> Full Mount</string>
+        <string name="Position"> Back Control</string>
+        <string name="Position"> North-South</string>
+        <string name="Position"> Turtle</string>
+        <string name="Position"> Knee on Belly</string>
+    </item>
+</assets>

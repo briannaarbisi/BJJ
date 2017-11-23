@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<assets>
+    <item type = "id" name="MovesList">
+        <string name="Attack"> Guillotine</string>
+        <string name="Attack"> Arm Bar</string>
+        <string name="Attack"> Collar Choke</string>
+        <string name="Attack"> Arm lock</string>
+        <string name="Attack"> Americana</string>
+        <string name="Attack"> North-South Choke</string>
+        <string name="Attack"> Triangle Choke</string>
+        <string name="Attack"> Head-and-Arm Choke</string>
+        <string name="Attack"> Rear Naked Choke</string>
+        <string name="Attack"> Ezikiol Choke</string>
+
+        <string name="Takedown"> Single Leg</string>
+        <string name="Takedown"> Double Leg</string>
+        <string name="Takedown"> Basic Judo Leg Sweep</string>
+        <string name="Takedown"> High Crotch to Double Leg</string>
+        <string name="Takedown"> Fireman's</string>
+        <string name="Takedown"> Snap-down</string>
+
+        <string name="Pass"> Double Under</string>
+        <string name="Pass"> Standing Guard Break</string>
+        <string name="Pass"> Knee Slicer</string>
+        <string name="Pass"> Single Under Knee Control</string>
+        <string name="Pass"> Single Under Knee Control with Back Step</string>
+        <string name="Pass"> Leg Drag</string>
+
+        <string name="Sweep"> Scissor</string>
+        <string name="Sweep"> Sit-up</string>
+        <string name="Sweep"> DeLaRiva Knockdown</string>
+        <string name="Sweep"> Baby Bolo</string>
+        <string name="Sweep"> Kiss of the Dragon</string>
+        <string name="Sweep"> Butterfly Sweep</string>
+    </item>
+</assets>
