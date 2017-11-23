@@ -45,6 +45,9 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class Home extends AppCompatActivity {
 
+    ArrayAdapter<String> adapter;
+    List<String> argsList;
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -58,7 +61,7 @@ public class Home extends AppCompatActivity {
 
                 case R.id.navigation_new_strategy:
                     Intent intent_new_strategy = new Intent(Home.this,AddCustomStrategyActivity.class);
-                    startActivity(intent_new_strategy);
+                    startActivityForResult(intent_new_strategy, 1);
                     return true;
 
                 case R.id.navigation_eval:
@@ -94,7 +97,7 @@ public class Home extends AppCompatActivity {
 
         String[] args = {"Default Offensive", "Default Defensive", "My First Offensive"};
 
-        List<String> argsList = new ArrayList<String>();
+        argsList = new ArrayList<String>();
 
         Collections.addAll(argsList, args);
 
@@ -170,7 +173,7 @@ public class Home extends AppCompatActivity {
 
         Collections.addAll(argsList, args);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+        adapter = new ArrayAdapter<String>(
                 this,
                 R.layout.list_items,
                 R.id.textView,
@@ -211,6 +214,16 @@ public class Home extends AppCompatActivity {
         bottomNavigationView.setItemIconTintList(colorStateList);
 
     }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                String strEditText = data.getStringExtra("strategyName");
+                argsList.add(strEditText);
+                adapter.notifyDataSetChanged();
 
+            }
+        }
+    }
 
 }

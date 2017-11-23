@@ -1,6 +1,7 @@
 package team5.bjj;
 
 import android.app.ActionBar;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -29,6 +30,13 @@ public class AddCustomStrategyActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_create:
                     //mTextMessage.setText(R.string.title_notifications);
+                    Intent intent = new Intent();
+
+                    mTextMessage = (TextView) findViewById(R.id.name);
+                    String name = mTextMessage.getText().toString();
+                    intent.putExtra("strategyName", name);
+                    setResult(RESULT_OK, intent);
+                    finish();
                     return true;
             }
             return false;
