@@ -47,6 +47,7 @@ public class Home extends AppCompatActivity {
 
     ArrayAdapter<String> adapter;
     List<String> argsList;
+    String[] args= {"Default Offensive", "Default Defensive", "My First Offensive"};
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -95,31 +96,13 @@ public class Home extends AppCompatActivity {
         changeMenuItemCheckedStateColor(BottomNavigation, "#999999", "#999999");
         BottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        String[] args = {"Default Offensive", "Default Defensive", "My First Offensive"};
-
         argsList = new ArrayList<String>();
 
         Collections.addAll(argsList, args);
 
-        //ListView tv = findViewById(R.id.home_list);
-
-        ///tv.setOnClickListener(new View.OnClickListener() {
-         ///   @Override
-            //public void onClick(View v) {
-            //    Intent intent_strategize = new Intent(Home.this,StrategizeActivity.class);
-           //     startActivity(intent_strategize);
-           // }
-       /// });
-
-
-        //XML Parser Goes Here
+        //XML Parser
         try {
-            //AssetManager assetManager = getResources().getAssets();
 
-            //String tempDir = System.getProperty("user.dir");
-            //String myFile = getFileStreamPath("strategies.xml");
-            //InputStream is = (InputStream) getResources().getAssets().open(R.id.Strategy2);
-            //InputStream is = getAssets().open("/Users/PEFO/Documents/5115/JiuJitsuAppProject/BJJRepo/app/src/main/res/values/strategies.xml");
             InputStream is = getAssets().open("strategies.xml");
 
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -142,32 +125,16 @@ public class Home extends AppCompatActivity {
                     listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            //Object listItem = listview.getItemAtPosition(position);
+                            String temp = argsList.get(position);
                             Intent intent_strategize = new Intent(Home.this, StrategizeActivity.class);
+                            Bundle b = new Bundle();
+                            intent_strategize.putExtra("key", temp);
                             startActivity(intent_strategize);
                         }
                     });
-
-
                 }
 
-
-
-
-                    /*tv.setOnClickListener(new OnItemClickListener(){
-                        @Override
-                    public void onItemClick(AdapterView<?> parent)  {
-                        Intent intent_strategize = new Intent(Home.this,StrategizeActivity.class);
-                        startActivity(intent_strategize);
-                     }
-                     }); */
-                    //AdapterView tempview = AdapterView.newInstance();
-                    //listview.setOnItemClickListener(AdapterView tempview = (AdapterView)OnItemClickListener(){
-                    //    @Override
-                   //     public void onItemClick(AdapterView<?> parent)});
-                   // }
-                }
-
+            }
 
         } catch (Exception e) {e.printStackTrace();}
 
