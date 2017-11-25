@@ -15,7 +15,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.util.DisplayMetrics;
 
-import java.io.InputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -30,6 +31,7 @@ import android.widget.ExpandableListView.OnGroupCollapseListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.Toast;
 
+import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -37,6 +39,9 @@ import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
 
 public class StrategizeActivity extends AppCompatActivity {
 
@@ -46,6 +51,9 @@ public class StrategizeActivity extends AppCompatActivity {
     ExpandableListView expListView;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
+    List<String> argsList;
+    ArrayAdapter<String> adapter;
+    String[] args= {"Default Offensive", "Default Defensive", "My First Offensive"};
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -94,7 +102,19 @@ public class StrategizeActivity extends AppCompatActivity {
         expListView = (ExpandableListView)findViewById(R.id.expandable_list);
         expListView.setIndicatorBounds(width - GetPixelFromDips(50), width - GetPixelFromDips(10));
 
-        prepareListData();
+        String newString;
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                newString= null;
+            } else {
+                newString= extras.getString("key");
+            }
+        } else {
+            newString= (String) savedInstanceState.getSerializable("key");
+        }
+
+        prepareListData(newString);
 
         ExpandableListAdapter random = new ExpandableListAdapter(this, listDataHeader, listDataChild);
 
@@ -107,43 +127,58 @@ public class StrategizeActivity extends AppCompatActivity {
     /*
  * Preparing the list data
  */
-    private void prepareListData() {
+    private void prepareListData(String xmlName) {
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
+        argsList = new ArrayList<String>();
 
-        // Adding child data
-        listDataHeader.add("Top 250");
-        listDataHeader.add("Now Showing");
-        listDataHeader.add("Coming Soon..");
+        Collections.addAll(argsList, args);
 
-        // Adding child data
-        List<String> top250 = new ArrayList<String>();
-        top250.add("The Shawshank Redemption");
-        top250.add("The Godfather");
-        top250.add("The Godfather: Part II");
-        top250.add("Pulp Fiction");
-        top250.add("The Good, the Bad and the Ugly");
-        top250.add("The Dark Knight");
-        top250.add("12 Angry Men");
+        //XML Parser Goes Here
+        try {
 
-        List<String> nowShowing = new ArrayList<String>();
-        nowShowing.add("The Conjuring");
-        nowShowing.add("Despicable Me 2");
-        nowShowing.add("Turbo");
-        nowShowing.add("Grown Ups 2");
-        nowShowing.add("Red 2");
-        nowShowing.add("The Wolverine");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.newDocument();
 
-        List<String> comingSoon = new ArrayList<String>();
-        comingSoon.add("2 Guns");
-        comingSoon.add("The Smurfs 2");
-        comingSoon.add("The Spectacular Now");
-        comingSoon.add("The Canyons");
-        comingSoon.add("Europa Report");
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            FileInputStream temp2 = openFileInput(xmlName + ".xml");
 
-        listDataChild.put(listDataHeader.get(0), top250); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), nowShowing);
-        listDataChild.put(listDataHeader.get(2), comingSoon);
+
+           // InputStream is = getAssets().open(xmlName + ".xml");
+           //OpenFileInput()
+
+            doc = dBuilder.parse(temp2);
+            temp2.close();
+            Element element=doc.getDocumentElement();
+            //Element element=doc.getDocumentElement();
+
+            element.normalize();
+
+            NodeList nList = doc.getElementsByTagName("item");
+            int temp = nList.getLength();
+
+            for (int i=0; i<nList.getLength(); i++) {
+                Node node = nList.item(0);
+
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
+
+                    listDataHeader.add(node.getLocalName());
+                    NodeList nodes = node.getChildNodes();
+
+                    int temp3 = nodes.getLength();
+                    List<String> templist = new ArrayList<String>();
+                    for (int j=0; j<nodes.getLength(); j++) {
+                        Node nodesc = nodes.item(j);
+
+                        templist.add(nodesc.getLocalName());
+                    }
+                    listDataChild.put(node.getLocalName(), templist);
+                }
+            }
+
+        } catch (Exception e) {e.printStackTrace();}
     }
 
     private void changeMenuItemCheckedStateColor(BottomNavigationView bottomNavigationView, String checkedColorHex, String uncheckedColorHex) {
