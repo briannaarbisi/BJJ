@@ -1,33 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <assets>
-    <!--<strategy type = "id" name="Default">-->
-        <!--<string name="name">Default</string>-->
-        <!--<string name="description">As simple as it gets.</string>-->
-        <!--<position>-->
-            <!--Standing-->
-            <!--<move>Single</move>-->
-            <!--<move>Double</move>-->
-        <!--</position>-->
-        <!--<position>-->
-            <!--Top Guard-->
-            <!--<move>Knee Slicer</move>-->
-            <!--<move>Standing Guard Break</move>-->
-        <!--</position>-->
-    <!--</strategy>-->
+    <strategy id="Strategy2">
+        <name>strategies</name>
+        <description>As simple as it gets.</description>
 
-    <item type = "id" name="Strategy2">
-        <string name="name">DefaultOffensiveTestXML</string>
-        <string name="description">As simple as it gets.</string>
+        <position id="standing">
+            <move>Single</move>
+            <move>Double</move>
+            <move>Guillotine</move>
+        </position>
 
-        <item type="id" name="standing">
-            <item type="move" name="Single"></item>
-            <item type="move" name="Double"></item>
-            <item type="move" name="Guillotine"></item>
-        </item>
-
-        <item type="id" name="top_gaurd">
-            <item type="move" name="Knee Slice"></item>
-            <item type="move" name="Standing Guard Break"></item>
-        </item>
-    </item>
+        <position id="top_gaurd">
+            <move>Knee Slice</move>
+            <move>Standing Guard Break</move>
+        </position>
+    </strategy>
 </assets>

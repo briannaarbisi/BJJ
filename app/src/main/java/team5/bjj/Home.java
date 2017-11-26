@@ -1,5 +1,6 @@
 package team5.bjj;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -21,6 +22,9 @@ import org.w3c.dom.NodeList;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
+
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -32,6 +36,10 @@ import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import static java.lang.System.in;
 
@@ -47,7 +55,8 @@ public class Home extends AppCompatActivity {
 
     ArrayAdapter<String> adapter;
     List<String> argsList;
-    String[] args= {"Default Offensive", "Default Defensive", "My First Offensive"};
+    //String[] args= {"Default Offensive", "Default Defensive", "My First Offensive"};
+    String[] args= {"strategies"};
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -112,9 +121,23 @@ public class Home extends AppCompatActivity {
             Element element=doc.getDocumentElement();
             element.normalize();
 
-            //NodeList nList = doc.getElementsByTagName("employee");
-            NodeList nList = doc.getElementsByTagName("string");
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(doc);
+
+            ByteArrayOutputStream bos=new ByteArrayOutputStream();
+            StreamResult result=new StreamResult(bos);
+            transformer.transform(source, result);
+            byte []array=bos.toByteArray();
+
+            FileOutputStream fos = openFileOutput("strategies.xml", Context.MODE_PRIVATE);
+            fos.write(array);
+            fos.close();
+
+            NodeList nList = doc.getElementsByTagName("name");
             int temp = nList.getLength();
+
+            //argsList.add("strategies");
 
             for (int i=0; i<nList.getLength(); i++) {
                 Node node = nList.item(0);
@@ -149,16 +172,9 @@ public class Home extends AppCompatActivity {
         ListView list = (ListView) findViewById(R.id.home_list);
         list.setAdapter(adapter);
 
-        argsList.add("Adding a new strategy");
+        //argsList.add("Adding a new strategy");
         adapter.notifyDataSetChanged();
     }
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_home, menu);
-        return true;
-    }*/
-
 
     private void changeMenuItemCheckedStateColor(BottomNavigationView bottomNavigationView, String checkedColorHex, String uncheckedColorHex) {
         int checkedColor = Color.parseColor(checkedColorHex);
