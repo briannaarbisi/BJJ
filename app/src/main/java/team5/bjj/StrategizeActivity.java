@@ -225,33 +225,4 @@ public class StrategizeActivity extends AppCompatActivity {
         // Convert the dps to pixels, based on density scale
         return (int) (pixels * scale + 0.5f);
     }
-
-    /*
-    public static List<Node> list(final NodeList list) {
-        return new AbstractList<Node>() {
-            public int size() {
-                return list.getLength();
-            }
-
-            public Node get(int index) {
-                Node item = list.item(index);
-                if (item == null)
-                    throw new IndexOutOfBoundsException();
-                return item;
-            }
-        };
-    }
-
-    public static List<Node> getElementsByTagName(Element e, String tag) {
-        return list(e.getElementsByTagName(tag));
-    }
-
-    public static int size(NodeList currNode){
-        int size = 0;
-        NodeList temp = currNode;
-        for (int j = 0; i < length-4; temp=temp.getNextNode()) {
-            size++;
-        }
-        return size;
-    } */
 }
