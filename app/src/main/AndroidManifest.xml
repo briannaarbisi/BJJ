@@ -39,7 +39,7 @@
         </activity>
         <activity
             android:name=".AddCustomPositionActivity"
-            android:label="Add Custom Position"/>
+            android:label="Add Custom Position" />
         <activity
             android:name=".HomeEval"
             android:label="@string/title_eval"
@@ -80,6 +80,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="team5.bjj.EvalMovesSuccessful" />
         </activity>
+        <activity android:name=".SearchDescriptionActivity"></activity>
     </application>
 
 </manifest>

@@ -29,8 +29,8 @@ public class SearchActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_custom_position:
 
-                    //Intent intent = new Intent(SearchActivity.this,SearchActivity.class);
-                    //startActivity(new Intent(SearchActivity.this, SearchActivity.class));
+                    Intent intent = new Intent(SearchActivity.this,AddCustomPositionActivity.class);
+                    startActivity(intent);
                     return true;
                 case R.id.navigation_custom_move:
 
@@ -55,7 +55,7 @@ public class SearchActivity extends AppCompatActivity {
         super.onBackPressed();
         this.finish();
     }
-    ArrayAdapter<String> adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,24 +76,22 @@ public class SearchActivity extends AppCompatActivity {
         changeMenuItemCheckedStateColor(BottomNavigation, "#999999", "#999999");
         BottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        String[] args = new String[] {"Button-Hidden", "Move1", "Move2", "Move3", "Move1", "Move2", "Move1", "Move2",
-                "Move1", "Move2", "Move10", "Move2", "Move10", "Button-Hidden"};
-        //String[] positionArgs = new String[] {};
+        String[] args = {"Hidden", "Move 1", "Move 2", "Position 1", "Move 3", "Position 2"};
         final List<String> argsList = new ArrayList<String>();
         Collections.addAll(argsList, args);
-        adapter = new ArrayAdapter<String>(
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this,
                 R.layout.list_items,
                 R.id.textView,
                 argsList);
 
-        final ListView listView = (ListView) findViewById(R.id.position_move_list);
-        listView.setAdapter(adapter);
+        final ListView list = (ListView) findViewById(R.id.position_move_list);
+        list.setAdapter(adapter);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Object listItem = listView.getItemAtPosition(position);
+                Object listItem = list.getItemAtPosition(position);
                 String valSelected = (String)listItem;
                 Intent intent_search_description = new Intent(SearchActivity.this, SearchDescriptionActivity.class);
                 Bundle b = new Bundle();
