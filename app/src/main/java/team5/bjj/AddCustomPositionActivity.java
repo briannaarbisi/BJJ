@@ -1,5 +1,6 @@
 package team5.bjj;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -23,9 +24,20 @@ public class AddCustomPositionActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                //case R.id.navigation_home:
-                //   mTextMessage.setText(R.string.title_home);
-                //   return true;
+                case R.id.navigation_create:
+                    Intent intent = new Intent();
+
+                    mTextMessage = (TextView) findViewById(R.id.name);
+                    String name = mTextMessage.getText().toString();
+
+                    mTextMessage = (TextView) findViewById(R.id.description);
+                    String description = mTextMessage.getText().toString();
+
+                    intent.putExtra("positionName", name);
+                    intent.putExtra("description", description);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                   return true;
                 case R.id.navigation_cancel:
                     //mTextMessage.setText(R.string.title_dashboard);
                     onBackPressed();
