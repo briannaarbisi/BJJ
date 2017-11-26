@@ -76,7 +76,7 @@ public class SearchActivity extends AppCompatActivity {
         changeMenuItemCheckedStateColor(BottomNavigation, "#999999", "#999999");
         BottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        String[] args = {"Hidden", "Move 1", "Move 2", "Position 1", "Move 3", "Position 2"};
+        String[] args = {"Hidden", "Single Leg Takedown", "Double Leg Takedown", "Top Guard"};
         final List<String> argsList = new ArrayList<String>();
         Collections.addAll(argsList, args);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
