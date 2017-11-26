@@ -55,16 +55,15 @@
 
     <ExpandableListView
         android:id="@+id/expandable_list"
-        android:layout_width="fill_parent"
-        android:layout_height="454dp"
-        android:layout_marginTop="58dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:groupIndicator="@drawable/settings_selector"
         android:transcriptMode="alwaysScroll"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="58dp"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settings_home"
-        app:layout_constraintVertical_bias="1.0" />
+        />
 
 </android.support.constraint.ConstraintLayout>

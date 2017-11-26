@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <assets>
     <strategy id="Strategy2">
-        <name>DefaultOffensiveTestXML</name>
+        <name>strategies</name>
         <description>As simple as it gets.</description>
 
         <position id="standing">

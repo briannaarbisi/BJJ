@@ -55,7 +55,8 @@ public class Home extends AppCompatActivity {
 
     ArrayAdapter<String> adapter;
     List<String> argsList;
-    String[] args= {"Default Offensive", "Default Defensive", "My First Offensive"};
+    //String[] args= {"Default Offensive", "Default Defensive", "My First Offensive"};
+    String[] args= {"strategies"};
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -136,7 +137,7 @@ public class Home extends AppCompatActivity {
             NodeList nList = doc.getElementsByTagName("name");
             int temp = nList.getLength();
 
-            argsList.add("strategies");
+            //argsList.add("strategies");
 
             for (int i=0; i<nList.getLength(); i++) {
                 Node node = nList.item(0);
