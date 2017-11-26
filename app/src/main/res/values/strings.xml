@@ -9,6 +9,7 @@
     <string name="title_custom_position">Custom Position</string>
     <string name="title_custom_move">Custom Move</string>
     <string name="title_activity_strategize">Strategize Activity</string>
+    <string name="title_activity_search_description">Description</string>
 
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>

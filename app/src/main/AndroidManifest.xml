@@ -39,7 +39,11 @@
         </activity>
         <activity
             android:name=".AddCustomPositionActivity"
-            android:label="Add Custom Position" />
+            android:label="Add Custom Position">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="team5.bjj.AddCustomPositionActivity" />
+        </activity>
         <activity
             android:name=".HomeEval"
             android:label="@string/title_eval"
@@ -80,7 +84,20 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="team5.bjj.EvalMovesSuccessful" />
         </activity>
-        <activity android:name=".SearchDescriptionActivity"></activity>
+        <activity
+            android:name=".SearchDescriptionActivity"
+            android:label="Description">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="team5.bjj.SearchDescriptionActivity" />
+        </activity>
+        <activity
+            android:name=".AddCustomMoveActivity"
+            android:label="Add Custom Move">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="team5.bjj.AddCustomMoveActivity" />
+        </activity>
     </application>
 
 </manifest>

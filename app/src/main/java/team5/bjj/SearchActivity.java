@@ -35,7 +35,8 @@ public class SearchActivity extends AppCompatActivity {
                     startActivityForResult(intent_new_position, 1);
                     return true;
                 case R.id.navigation_custom_move:
-
+                    Intent intent_new_move = new Intent(SearchActivity.this,AddCustomMoveActivity.class);
+                    startActivityForResult(intent_new_move, 1);
 
                     return true;
 
