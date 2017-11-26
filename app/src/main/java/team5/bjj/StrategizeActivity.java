@@ -1,5 +1,6 @@
 package team5.bjj;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -17,6 +18,7 @@ import android.util.DisplayMetrics;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -42,6 +44,13 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+import java.util.AbstractList;
+
 
 public class StrategizeActivity extends AppCompatActivity {
 
@@ -131,7 +140,7 @@ public class StrategizeActivity extends AppCompatActivity {
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
         argsList = new ArrayList<String>();
-
+        List<String> templist = new ArrayList<String>();
         Collections.addAll(argsList, args);
 
         //XML Parser Goes Here
@@ -143,38 +152,45 @@ public class StrategizeActivity extends AppCompatActivity {
 
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
-            FileInputStream temp2 = openFileInput(xmlName + ".xml");
 
+            //InputStream currentFile = getAssets().open("strategies.xml");
+            String fileName = xmlName+".xml";
+            InputStream currentFile = openFileInput(fileName);
 
-           // InputStream is = getAssets().open(xmlName + ".xml");
-           //OpenFileInput()
-
-            doc = dBuilder.parse(temp2);
-            temp2.close();
+            doc = dBuilder.parse(currentFile);
+            currentFile.close();
             Element element=doc.getDocumentElement();
-            //Element element=doc.getDocumentElement();
 
             element.normalize();
+            NodeList n = element.getElementsByTagName("strategy");
 
-            NodeList nList = doc.getElementsByTagName("item");
-            int temp = nList.getLength();
+            //for (int i = 2; i < nList.getLength(); i++) {
+            Node strategy = n.item(0);
+            Element d = (Element) strategy;
+            NodeList nList = d.getElementsByTagName("position");
+            for (int i = 0; i < nList.getLength(); i++) {
+                Node child = nList.item(i);
+                if (child.getNodeType() == Node.ELEMENT_NODE) {
+                    Element e = (Element) child;
+                    e.normalize();
+                    String position = e.getAttribute("id");
+                    listDataHeader.add(position);
 
-            for (int i=0; i<nList.getLength(); i++) {
-                Node node = nList.item(0);
-
-                if (node.getNodeType() == Node.ELEMENT_NODE) {
-
-                    listDataHeader.add(node.getLocalName());
-                    NodeList nodes = node.getChildNodes();
-
-                    int temp3 = nodes.getLength();
-                    List<String> templist = new ArrayList<String>();
-                    for (int j=0; j<nodes.getLength(); j++) {
-                        Node nodesc = nodes.item(j);
-
-                        templist.add(nodesc.getLocalName());
+                    NodeList loopNodeChildren = e.getElementsByTagName("move");
+                    templist = new ArrayList<String>();
+                    int length = loopNodeChildren.getLength();
+                    for (int j = 0; j < length; j++) {
+                        Node child2 = loopNodeChildren.item(j);
+                        //  if ((child != null)&&(child.getNodeType() == Node.ELEMENT_NODE)) {
+                        if (child2.getNodeType() == Node.ELEMENT_NODE) {
+                            //Element temp = (Element) child;
+                            String move = child2.getTextContent();
+                            templist.add(move);
+                            listDataChild.put(((Element)(child2.getParentNode())).getAttribute("id"), templist);
+                        }
+                        //listDataChild.put(position, templist);
                     }
-                    listDataChild.put(node.getLocalName(), templist);
+
                 }
             }
 
@@ -210,4 +226,32 @@ public class StrategizeActivity extends AppCompatActivity {
         return (int) (pixels * scale + 0.5f);
     }
 
+    /*
+    public static List<Node> list(final NodeList list) {
+        return new AbstractList<Node>() {
+            public int size() {
+                return list.getLength();
+            }
+
+            public Node get(int index) {
+                Node item = list.item(index);
+                if (item == null)
+                    throw new IndexOutOfBoundsException();
+                return item;
+            }
+        };
+    }
+
+    public static List<Node> getElementsByTagName(Element e, String tag) {
+        return list(e.getElementsByTagName(tag));
+    }
+
+    public static int size(NodeList currNode){
+        int size = 0;
+        NodeList temp = currNode;
+        for (int j = 0; i < length-4; temp=temp.getNextNode()) {
+            size++;
+        }
+        return size;
+    } */
 }
