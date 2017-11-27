@@ -56,6 +56,7 @@
         android:layout_width="380dp"
         android:layout_height="420dp"
         android:groupIndicator="@drawable/settings_selector"
+        app:layout_constraintTop_toBottomOf="@+id/description"
         android:transcriptMode="alwaysScroll"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
