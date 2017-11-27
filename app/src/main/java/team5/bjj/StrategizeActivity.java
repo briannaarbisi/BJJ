@@ -39,6 +39,7 @@ public class StrategizeActivity extends AppCompatActivity {
     HashMap<String, List<String>> listDataChild;
     List<String> argsList;
     ArrayAdapter<String> adapter;
+    ExpandableListAdapter random;
     String[] args= {"Default Offensive", "Default Defensive", "My First Offensive"};
     String strategyName;
 
@@ -48,11 +49,17 @@ public class StrategizeActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.strategize_navigation_delete:
+                //case R.id.strategize_navigation_delete:
                     //mTextMessage.setText(R.string.title_home);
-                    return true;
+                 //   return true;
                 case R.id.strategize_navigation_add_position:
                     //mTextMessage.setText(R.string.title_dashboard);
+                    Intent intent_new_position = new Intent(StrategizeActivity.this,AddCustomPositionActivityStrategize.class);
+                    startActivityForResult(intent_new_position, 2);
+                    return true;
+                case R.id.strategize_navigation_add_move:
+                    Intent intent_new_move = new Intent(StrategizeActivity.this,AddCustomMoveActivityStrategize.class);
+                    startActivityForResult(intent_new_move, 3);
                     return true;
                 case R.id.strategize_navigation_Evaluate:
                     //TextMessage.setText(R.string.title_notifications);
@@ -136,7 +143,7 @@ public class StrategizeActivity extends AppCompatActivity {
         strategyName = newString;
         prepareListData(newString);
 
-        ExpandableListAdapter random = new ExpandableListAdapter(this, listDataHeader, listDataChild);
+        random = new ExpandableListAdapter(this, listDataHeader, listDataChild);
 
         // setting list adapter
         expListView.setAdapter(random);
@@ -236,5 +243,26 @@ public class StrategizeActivity extends AppCompatActivity {
         final float scale = getResources().getDisplayMetrics().density;
         // Convert the dps to pixels, based on density scale
         return (int) (pixels * scale + 0.5f);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 2) {
+            if(resultCode == RESULT_OK) {
+                String strEditText = data.getStringExtra("positionName");
+                listDataHeader.add(strEditText);
+                random.notifyDataSetChanged();
+
+            }
+        }
+        if (requestCode == 3) {
+            if(resultCode == RESULT_OK) {
+                String strEditText = data.getStringExtra("moveName");
+                //argsList.add(strEditText);
+                //listDataChild.put(((Element)(child2.getParentNode())).getAttribute("id"), templist);
+                random.notifyDataSetChanged();
+
+            }
+        }
     }
 }
