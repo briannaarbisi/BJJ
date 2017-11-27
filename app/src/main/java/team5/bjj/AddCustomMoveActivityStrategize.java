@@ -3,17 +3,22 @@ package team5.bjj;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 //import android.widget.ListAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -120,7 +125,7 @@ public class AddCustomMoveActivityStrategize extends AppCompatActivity {
         strategyName = newString;
         prepareListData(strategyName);
         //random = new ListAdapter(this, listDataHeader);
-
+        List<String> a = listDataHeader;
         adapter = new ArrayAdapter<String>(
                 this,
                 R.layout.list_items,
@@ -128,8 +133,16 @@ public class AddCustomMoveActivityStrategize extends AppCompatActivity {
                 listDataHeader);
         ListView list = (ListView) findViewById(R.id.position_list);
         list.setAdapter(adapter);
-
+        list.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(AddCustomMoveActivityStrategize.this, (CharSequence) listDataHeader.get(position), Toast.LENGTH_SHORT).show();
+                currentPosition = listDataHeader.get(position);
+            }
+        });
         adapter.notifyDataSetChanged();
+
 
 
         //ListView position = (ListView)findViewById(R.id.position_list);

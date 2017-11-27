@@ -10,7 +10,7 @@
             <move>Guillotine</move>
         </position>
 
-        <position id="top_gaurd">
+        <position id="top guard">
             <move>Knee Slice</move>
             <move>Standing Guard Break</move>
         </position>
