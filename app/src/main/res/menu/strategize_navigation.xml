@@ -9,7 +9,7 @@
         android:title="Add Position" />
 
     <item
-        android:id="@+id/strategize_navigation_custom_move"
-        android:title="Reorder" />
+        android:id="@+id/strategize_navigation_Evaluate"
+        android:title="Evaluate" />
 
 </menu>
