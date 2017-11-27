@@ -10,7 +10,7 @@
         android:title="@string/title_new_strategy" />
 
     <item
-        android:id="@+id/navigation_eval"
-        android:title="@string/title_eval" />
+        android:id="@+id/navigation_remove"
+        android:title="Remove" />
 
 </menu>

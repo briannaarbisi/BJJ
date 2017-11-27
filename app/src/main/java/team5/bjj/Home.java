@@ -55,6 +55,7 @@ public class Home extends AppCompatActivity {
 
     ArrayAdapter<String> adapter;
     List<String> argsList;
+    ListView listview;
     //String[] args= {"Default Offensive", "Default Defensive", "My First Offensive"};
     String[] args= {"strategies"};
 
@@ -74,8 +75,14 @@ public class Home extends AppCompatActivity {
                     startActivityForResult(intent_new_strategy, 1);
                     return true;
 
-                case R.id.navigation_eval:
-                    //Do Nothing
+                case R.id.navigation_remove:
+                    listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            argsList.remove(argsList.get(position));
+                            adapter.notifyDataSetChanged();
+                        }
+                    });
                     return true;
 
                 case R.id.navigation_settings:
@@ -142,7 +149,7 @@ public class Home extends AppCompatActivity {
                 Node node = nList.item(0);
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     args[i] = node.getTextContent();
-                    ListView listview = (ListView) findViewById(R.id.home_list);
+                    listview = (ListView) findViewById(R.id.home_list);
 
                     listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
