@@ -62,6 +62,7 @@ public class StrategizeActivity extends AppCompatActivity {
                     //intent_new_move.putExtra("key", strategyName);
                     Bundle c = new Bundle();
                     intent_new_move.putExtra("key", strategyName);
+                    //intent_new_move.putExtra("key2", positionName);
                     startActivityForResult(intent_new_move, 3);
                     return true;
                 case R.id.strategize_navigation_Evaluate:
@@ -260,9 +261,15 @@ public class StrategizeActivity extends AppCompatActivity {
         }
         if (requestCode == 3) {
             if(resultCode == RESULT_OK) {
+                List<String> templist = new ArrayList<String>();
                 String strEditText = data.getStringExtra("moveName");
+                String temp = strEditText;
+                String strEditText2 = data.getStringExtra("positionName");
                 //argsList.add(strEditText);
                 //listDataChild.put(((Element)(child2.getParentNode())).getAttribute("id"), templist);
+                templist = listDataChild.get(strEditText2);
+                templist.add(temp);
+                listDataChild.put(strEditText2,templist);
                 random.notifyDataSetChanged();
 
             }
