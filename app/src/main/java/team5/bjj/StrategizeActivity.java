@@ -4,10 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -76,8 +81,44 @@ public class StrategizeActivity extends AppCompatActivity {
                 case R.id.strategize_navigation_add_position:
                     //mTextMessage.setText(R.string.title_dashboard);
                     return true;
-                case R.id.strategize_navigation_custom_move:
+                case R.id.strategize_navigation_Evaluate:
                     //TextMessage.setText(R.string.title_notifications);
+                    int groupCount = expListView.getExpandableListAdapter().getGroupCount();
+                    for(int i = 0; i < groupCount; i++){
+                        expListView.expandGroup(i);
+                    }
+                    expListView.setOnChildClickListener(new OnChildClickListener() {
+                        @Override
+                        public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                            //parent.getChildAt(childPosition + groupPosition).setBackgroundColor(Color.CYAN);
+                            int color = Color.TRANSPARENT;
+                            Drawable background = parent.getExpandableListAdapter().getChildView(groupPosition,childPosition,false, v, parent).getBackground();
+                            if(background instanceof ColorDrawable)
+                            {
+                                color = ((ColorDrawable) background).getColor();
+                            }
+                            if (color == Color.CYAN)
+                            {
+                                parent.getExpandableListAdapter().getChildView(groupPosition,childPosition,false, v, parent).setBackgroundColor(Color.TRANSPARENT);
+
+                            } else {
+                                parent.getExpandableListAdapter().getChildView(groupPosition,childPosition,false, v, parent).setBackgroundColor(Color.CYAN);
+                            }
+                            return false;
+                        }
+                    });
+                    hideNavigationView();
+//                    NavigationView navigationView = (NavigationView) findViewById(R.id.strategize_navigation_id);
+//                    Menu menu = navigationView.getMenu();
+//                    MenuItem target = menu.findItem(R.id.strategize_navigation_id);
+//                    target.setVisible(false);
+//                    expListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                        @Override
+//                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                            parent.getItemAtPosition(position);
+//                            parent.get
+//                        }
+//                    });
                     return true;
                 case R.id.navigation_settings_search:
                     return true;
@@ -88,6 +129,10 @@ public class StrategizeActivity extends AppCompatActivity {
             return false;
         }
     };
+
+    private void hideNavigationView() {
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -196,6 +241,7 @@ public class StrategizeActivity extends AppCompatActivity {
 
         } catch (Exception e) {e.printStackTrace();}
     }
+
 
     private void changeMenuItemCheckedStateColor(BottomNavigationView bottomNavigationView, String checkedColorHex, String uncheckedColorHex) {
         int checkedColor = Color.parseColor(checkedColorHex);
