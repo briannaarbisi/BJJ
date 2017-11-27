@@ -81,6 +81,16 @@ public class Home extends AppCompatActivity {
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             argsList.remove(argsList.get(position));
                             adapter.notifyDataSetChanged();
+                            listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    String temp = argsList.get(position);
+                                    Intent intent_strategize = new Intent(Home.this, StrategizeActivity.class);
+                                    Bundle b = new Bundle();
+                                    intent_strategize.putExtra("key", temp);
+                                    startActivity(intent_strategize);
+                                }
+                            });
                         }
                     });
                     return true;
