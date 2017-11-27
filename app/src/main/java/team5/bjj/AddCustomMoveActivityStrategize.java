@@ -10,6 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
+//import android.widget.ListAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.w3c.dom.Document;
@@ -38,11 +41,13 @@ public class AddCustomMoveActivityStrategize extends AppCompatActivity {
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
     List<String> argsList;
-    ArrayAdapter<String> adapter;
     String[] args = {"Default Offensive", "Default Defensive", "My First Offensive"};
     String parent = "random";
     String newString;
     private TextView mTextMessage;
+    String strategyName;
+    ArrayAdapter<String> adapter;
+    //ListAdapter random;
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -65,11 +70,11 @@ public class AddCustomMoveActivityStrategize extends AppCompatActivity {
                     mTextMessage = (TextView) findViewById(R.id.name);
                     String name = mTextMessage.getText().toString();
 
-                    mTextMessage = (TextView) findViewById(R.id.description);
-                    String description = mTextMessage.getText().toString();
+                   // mTextMessage = (TextView) findViewById(R.id.description);
+                    //String description = mTextMessage.getText().toString();
 
                     intent.putExtra("moveName", name);
-                    intent.putExtra("description", description);
+                    //intent.putExtra("description", description);
                     setResult(RESULT_OK, intent);
                     finish();
                     return true;
@@ -100,7 +105,6 @@ public class AddCustomMoveActivityStrategize extends AppCompatActivity {
         changeMenuItemCheckedStateColor(navigation, "#999999", "#999999");
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if (extras == null) {
@@ -111,7 +115,24 @@ public class AddCustomMoveActivityStrategize extends AppCompatActivity {
         } else {
             newString = (String) savedInstanceState.getSerializable("key");
         }
+        strategyName = newString;
+        prepareListData(strategyName);
+        //random = new ListAdapter(this, listDataHeader);
 
+        adapter = new ArrayAdapter<String>(
+                this,
+                R.layout.list_items,
+                R.id.textView,
+                listDataHeader);
+        ListView list = (ListView) findViewById(R.id.position_list);
+        list.setAdapter(adapter);
+
+        adapter.notifyDataSetChanged();
+
+
+        //ListView position = (ListView)findViewById(R.id.position_list);
+        //position.setAdapter(new ListAdapter(this, R.id.position_list, listDataHeader));
+                //listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
     }
 
@@ -203,9 +224,4 @@ public class AddCustomMoveActivityStrategize extends AppCompatActivity {
         bottomNavigationView.setItemIconTintList(colorStateList);
 
     }
-
-    //public static void AddCustomMoveActivity(String garbage) {
-    //    parent = garbage;
-
-   // }
 }

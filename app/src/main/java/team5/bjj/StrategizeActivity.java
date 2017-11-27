@@ -59,6 +59,7 @@ public class StrategizeActivity extends AppCompatActivity {
                     return true;
                 case R.id.strategize_navigation_add_move:
                     Intent intent_new_move = new Intent(StrategizeActivity.this,AddCustomMoveActivityStrategize.class);
+                    //intent_new_move.putExtra("key", strategyName);
                     startActivityForResult(intent_new_move, 3);
                     return true;
                 case R.id.strategize_navigation_Evaluate:
