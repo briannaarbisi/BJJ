@@ -47,7 +47,7 @@
         </activity>
         <activity
             android:name=".AddCustomMoveActivityStrategize"
-            android:label="Add Custom Position"
+            android:label="Add Custom Move"
             android:parentActivityName=".StrategizeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
