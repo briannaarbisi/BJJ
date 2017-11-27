@@ -45,28 +45,16 @@
                 android:value="team5.bjj.AddCustomPositionActivity" />
         </activity>
         <activity
-            android:name=".HomeEval"
-            android:label="@string/title_eval"
-            android:parentActivityName=".Home">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="team5.bjj.Home" />
-        </activity>
-        <activity
-            android:name=".EvalPositionsAchieved"
-            android:label="@string/title_eval"
-            android:parentActivityName=".HomeEval">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="team5.bjj.HomeEval" />
+            android:name=".EvalMovesWereAttempted"
+            android:label="@string/title_eval">
         </activity>
         <activity
             android:name=".EvalMovesAttempted"
             android:label="@string/title_eval"
-            android:parentActivityName=".EvalPositionsAchieved">
+            android:parentActivityName=".EvalMovesWereAttempted">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="team5.bjj.EvalPositionsAchieved" />
+                android:value="team5.bjj.EvalMovesWereAttempted" />
         </activity>
         <activity
             android:name=".EvalMovesSuccessful"

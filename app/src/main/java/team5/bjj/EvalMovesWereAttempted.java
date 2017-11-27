@@ -3,14 +3,22 @@ package team5.bjj;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
-import android.util.DisplayMetrics;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -18,20 +26,17 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 
+/**
+ * Created by b on 11/18/17.
+ */
 
-public class StrategizeActivity extends AppCompatActivity {
+public class EvalMovesWereAttempted extends AppCompatActivity {
 
-    //private TextView mTextMessage;
 
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
@@ -41,51 +46,27 @@ public class StrategizeActivity extends AppCompatActivity {
     ArrayAdapter<String> adapter;
     String[] args= {"Default Offensive", "Default Defensive", "My First Offensive"};
     String strategyName;
-
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.strategize_navigation_delete:
-                    //mTextMessage.setText(R.string.title_home);
+                case R.id.navigation_cancel:
+                    onBackPressed();
                     return true;
-                case R.id.strategize_navigation_add_position:
-                    //mTextMessage.setText(R.string.title_dashboard);
-                    return true;
-                case R.id.strategize_navigation_Evaluate:
-                    //TextMessage.setText(R.string.title_notifications);
-                    Intent intent_eval_moves_attempted = new Intent(StrategizeActivity.this,EvalMovesWereAttempted.class);
+
+                case R.id.navigation_next:
+                    Intent intent_eval_moves_attempted = new Intent(EvalMovesWereAttempted.this,EvalMovesSuccessful.class);
                     Bundle b = new Bundle();
                     intent_eval_moves_attempted.putExtra("key", strategyName);
                     startActivity(intent_eval_moves_attempted);
+                    finish();
                     return true;
-//                    int groupCount = expListView.getExpandableListAdapter().getGroupCount();
-//                    for(int i = 0; i < groupCount; i++){
-//                        expListView.expandGroup(i);
-//                    }
-//                    expListView.setOnChildClickListener(new OnChildClickListener() {
-//                        @Override
-//                        public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-//                            //parent.getChildAt(childPosition + groupPosition).setBackgroundColor(Color.CYAN);
-//                            int color = Color.TRANSPARENT;
-//                            Drawable background = parent.getExpandableListAdapter().getChildView(groupPosition,childPosition,false, v, parent).getBackground();
-//                            if(background instanceof ColorDrawable)
-//                            {
-//                                color = ((ColorDrawable) background).getColor();
-//                            }
-//                            if (color == Color.CYAN)
-//                            {
-//                                parent.getExpandableListAdapter().getChildView(groupPosition,childPosition,false, v, parent).setBackgroundColor(Color.TRANSPARENT);
-//
-//                            } else {
-//                                parent.getExpandableListAdapter().getChildView(groupPosition,childPosition,false, v, parent).setBackgroundColor(Color.CYAN);
-//                            }
-//                            return false;
-//                        }
-//                    });
-                case R.id.navigation_settings_search:
+
+                case R.id.navigation_settings:
                     return true;
 
                 case R.id.navigation_home:
@@ -95,22 +76,17 @@ public class StrategizeActivity extends AppCompatActivity {
         }
     };
 
-    private void hideNavigationView() {
-
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_strategize);
+        setContentView(R.layout.activity_eval_positions_achieved);
 
         BottomNavigationView TopNavigation = (BottomNavigationView) findViewById(R.id.settings_home);
         changeMenuItemCheckedStateColor(TopNavigation, "#999999", "#999999");
         TopNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-
-        //mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView BottomNavigation = (BottomNavigationView) findViewById(R.id.strategize_navigation_id);
+        BottomNavigationView BottomNavigation = (BottomNavigationView) findViewById(R.id.search_new_strategy_eval);
         changeMenuItemCheckedStateColor(BottomNavigation, "#999999", "#999999");
         BottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
@@ -132,7 +108,6 @@ public class StrategizeActivity extends AppCompatActivity {
         } else {
             newString= (String) savedInstanceState.getSerializable("key");
         }
-
         strategyName = newString;
         prepareListData(newString);
 
@@ -142,11 +117,55 @@ public class StrategizeActivity extends AppCompatActivity {
         expListView.setAdapter(random);
 
 
+        int groupCount = expListView.getExpandableListAdapter().getGroupCount();
+        for(int i = 0; i < groupCount; i++){
+            expListView.expandGroup(i);
+        }
+        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                //parent.getChildAt(childPosition + groupPosition).setBackgroundColor(Color.CYAN);
+                int color = Color.TRANSPARENT;
+                Drawable background = parent.getExpandableListAdapter().getChildView(groupPosition,childPosition,false, v, parent).getBackground();
+                if(background instanceof ColorDrawable)
+                {
+                    color = ((ColorDrawable) background).getColor();
+                }
+                if (color == Color.CYAN)
+                {
+                    parent.getExpandableListAdapter().getChildView(groupPosition,childPosition,false, v, parent).setBackgroundColor(Color.TRANSPARENT);
+
+                } else {
+                    parent.getExpandableListAdapter().getChildView(groupPosition,childPosition,false, v, parent).setBackgroundColor(Color.CYAN);
+                }
+                return false;
+            }
+        });
+
     }
 
-    /*
- * Preparing the list data
- */
+    private void changeMenuItemCheckedStateColor(BottomNavigationView bottomNavigationView, String checkedColorHex, String uncheckedColorHex) {
+        int checkedColor = Color.parseColor(checkedColorHex);
+        int uncheckedColor = Color.parseColor(uncheckedColorHex);
+
+        int[][] states = new int[][] {
+                new int[] {-android.R.attr.state_checked}, // unchecked
+                new int[] {android.R.attr.state_checked}, // checked
+
+        };
+
+        int[] colors = new int[] {
+                uncheckedColor,
+                checkedColor
+        };
+
+        ColorStateList colorStateList = new ColorStateList(states, colors);
+
+        bottomNavigationView.setItemTextColor(colorStateList);
+        bottomNavigationView.setItemIconTintList(colorStateList);
+
+    }
+
     private void prepareListData(String xmlName) {
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
@@ -208,33 +227,11 @@ public class StrategizeActivity extends AppCompatActivity {
         } catch (Exception e) {e.printStackTrace();}
     }
 
-
-    private void changeMenuItemCheckedStateColor(BottomNavigationView bottomNavigationView, String checkedColorHex, String uncheckedColorHex) {
-        int checkedColor = Color.parseColor(checkedColorHex);
-        int uncheckedColor = Color.parseColor(uncheckedColorHex);
-
-        int[][] states = new int[][] {
-                new int[] {-android.R.attr.state_checked}, // unchecked
-                new int[] {android.R.attr.state_checked}, // checked
-
-        };
-
-        int[] colors = new int[] {
-                uncheckedColor,
-                checkedColor
-        };
-
-        ColorStateList colorStateList = new ColorStateList(states, colors);
-
-        bottomNavigationView.setItemTextColor(colorStateList);
-        bottomNavigationView.setItemIconTintList(colorStateList);
-
-    }
-
     public int GetPixelFromDips(float pixels) {
         // Get the screen's density scale
         final float scale = getResources().getDisplayMetrics().density;
         // Convert the dps to pixels, based on density scale
         return (int) (pixels * scale + 0.5f);
     }
+
 }

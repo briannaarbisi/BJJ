@@ -20,14 +20,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:menu="@menu/settings_home_navigation" />
 
-    <!--<ListView
-        android:id="@+id/home_list"
+    <ListView
+        android:id="@+id/attempt_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />-->
+        app:layout_constraintRight_toRightOf="parent" />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/search_new_strategy_eval"
@@ -48,5 +48,18 @@
             android:layout_height="34dp"
             android:text="Which moves were successful?" />
     </android.support.design.widget.BottomNavigationView>
+
+    <ExpandableListView
+        android:id="@+id/expandable_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="58dp"
+        android:groupIndicator="@drawable/settings_selector"
+        android:transcriptMode="alwaysScroll"
+        app:layout_constraintBottom_toTopOf="@+id/strategize_navigation_id"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settings_home" />
 
 </android.support.constraint.ConstraintLayout>

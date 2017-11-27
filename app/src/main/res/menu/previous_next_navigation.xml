@@ -5,7 +5,7 @@
         android:title="previous" />
 
     <item
-        android:id="@+id/navigation_Next"
+        android:id="@+id/navigation_next"
         android:title="Next" />
 
 </menu>

@@ -5,7 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="team5.bjj.EvalPositionsAchieved">
+    tools:context="team5.bjj.EvalMovesWereAttempted">
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/settings_home"
@@ -46,7 +46,20 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="34dp"
-            android:text="Which positions were achieved?" />
+            android:text="Which moves were attempted?" />
     </android.support.design.widget.BottomNavigationView>
+
+    <ExpandableListView
+        android:id="@+id/expandable_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="58dp"
+        android:groupIndicator="@drawable/settings_selector"
+        android:transcriptMode="alwaysScroll"
+        app:layout_constraintBottom_toTopOf="@+id/strategize_navigation_id"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settings_home" />
 
 </android.support.constraint.ConstraintLayout>

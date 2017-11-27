@@ -75,8 +75,7 @@ public class Home extends AppCompatActivity {
                     return true;
 
                 case R.id.navigation_eval:
-                    Intent intent_eval = new Intent(Home.this,HomeEval.class);
-                    startActivity(intent_eval);
+                    //Do Nothing
                     return true;
 
                 case R.id.navigation_settings:
