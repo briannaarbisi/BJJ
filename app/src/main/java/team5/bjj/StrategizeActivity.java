@@ -1,5 +1,6 @@
 package team5.bjj;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -12,12 +13,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 import android.util.DisplayMetrics;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -27,6 +31,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 
 public class StrategizeActivity extends AppCompatActivity {
@@ -42,6 +48,13 @@ public class StrategizeActivity extends AppCompatActivity {
     ExpandableListAdapter random;
     String[] args= {"Default Offensive", "Default Defensive", "My First Offensive"};
     String strategyName;
+    DocumentBuilderFactory dbFactory;
+    DocumentBuilder dBuilder;
+    Document doc;
+    TransformerFactory transformerFactory;
+    Transformer transformer;
+    String fileName;
+    List<String> templist;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -162,21 +175,21 @@ public class StrategizeActivity extends AppCompatActivity {
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
         argsList = new ArrayList<String>();
-        List<String> templist = new ArrayList<String>();
+
         Collections.addAll(argsList, args);
 
         //XML Parser Goes Here
         try {
 
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.newDocument();
+            dbFactory = DocumentBuilderFactory.newInstance();
+            dBuilder = dbFactory.newDocumentBuilder();
 
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
+
+            transformerFactory = TransformerFactory.newInstance();
+            transformer = transformerFactory.newTransformer();
 
             //InputStream currentFile = getAssets().open("strategies.xml");
-            String fileName = xmlName+".xml";
+            fileName = xmlName+".xml";
             InputStream currentFile = openFileInput(fileName);
 
             doc = dBuilder.parse(currentFile);
@@ -253,24 +266,100 @@ public class StrategizeActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 2) {
             if(resultCode == RESULT_OK) {
+
                 String strEditText = data.getStringExtra("positionName");
                 listDataHeader.add(strEditText);
                 random.notifyDataSetChanged();
+                Element element=doc.getDocumentElement();
+                element.normalize();
+                try {
+                    transformerFactory = TransformerFactory.newInstance();
+                    transformer = transformerFactory.newTransformer();
+
+                    Element temp = doc.createElement("position");
+                    Attr attr = doc.createAttribute("id");
+                    attr.setValue(strEditText);
+                    temp.setAttributeNode(attr);
+
+                    Element theElement = doc.getDocumentElement();
+
+                    theElement.normalize();
+                    NodeList n = theElement.getElementsByTagName("strategy");
+                    Node strategy = n.item(0);
+                    Element d = (Element) strategy;
+                    NodeList nList = d.getElementsByTagName("position");
+
+                    strategy.appendChild((Node)temp);
+
+                    DOMSource source = new DOMSource(doc);
+
+                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                    StreamResult result = new StreamResult(bos);
+                    transformer.transform(source, result);
+                    byte[] array = bos.toByteArray();
+
+                    FileOutputStream fos = openFileOutput(fileName, Context.MODE_PRIVATE);
+                    fos.write(array);
+                    fos.close();
+                }catch (Exception e) {e.printStackTrace();}
 
             }
         }
         if (requestCode == 3) {
             if(resultCode == RESULT_OK) {
-                List<String> templist = new ArrayList<String>();
+                templist = new ArrayList<String>();
                 String strEditText = data.getStringExtra("moveName");
                 String temp = strEditText;
                 String strEditText2 = data.getStringExtra("positionName");
+                String random3 = strEditText2;
                 //argsList.add(strEditText);
                 //listDataChild.put(((Element)(child2.getParentNode())).getAttribute("id"), templist);
                 templist = listDataChild.get(strEditText2);
                 templist.add(temp);
                 listDataChild.put(strEditText2,templist);
                 random.notifyDataSetChanged();
+                Element element=doc.getDocumentElement();
+                element.normalize();
+                try {
+                    transformerFactory = TransformerFactory.newInstance();
+                    transformer = transformerFactory.newTransformer();
+
+                    Element temp2 = doc.createElement("move");
+                    temp2.setNodeValue(temp);
+
+                    //Element temp2 = doc.createElement("move");
+                    //Attr attr = doc.createAttribute("id");
+                    //temp2.setNodeValue(strEditText);;
+                    NodeList n = element.getElementsByTagName("strategy");
+                    Node strategy = n.item(0);
+                    Element d = (Element) strategy;
+                    NodeList nList = d.getElementsByTagName("position");
+                    Element e;
+                    for (int i = 0; i < nList.getLength(); i++) {
+                        Node child = nList.item(i);
+                       // if (child.getNodeType() == Node.ELEMENT_NODE) {
+                            e = (Element) child;
+                            e.normalize();
+                            String position = e.getAttribute("id");
+                            //listDataHeader.add(position);
+                            if (position.equals(random3)) {
+                                e.appendChild((Node)temp2);
+                            }
+
+                        //}
+                    }
+
+                    DOMSource source = new DOMSource(doc);
+
+                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                    StreamResult result = new StreamResult(bos);
+                    transformer.transform(source, result);
+                    byte[] array = bos.toByteArray();
+
+                    FileOutputStream fos = openFileOutput(fileName, Context.MODE_PRIVATE);
+                    fos.write(array);
+                    fos.close();
+                }catch (Exception e) {e.printStackTrace();}
 
             }
         }
