@@ -47,7 +47,7 @@ public class AddCustomMoveActivityStrategize extends AppCompatActivity {
     private TextView mTextMessage;
     String strategyName;
     ArrayAdapter<String> adapter;
-    String position;
+    String currentPosition;
     //ListAdapter random;
 
 
@@ -75,7 +75,7 @@ public class AddCustomMoveActivityStrategize extends AppCompatActivity {
                     //String description = mTextMessage.getText().toString();
 
                     intent.putExtra("moveName", name);
-                    intent.putExtra("positionName", position);
+                    intent.putExtra("positionName", currentPosition);
                     //intent.putExtra("description", description);
                     setResult(RESULT_OK, intent);
                     finish();
