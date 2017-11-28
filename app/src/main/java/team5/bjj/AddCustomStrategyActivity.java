@@ -101,8 +101,8 @@ public class AddCustomStrategyActivity extends AppCompatActivity {
                     mTextMessage = (TextView) findViewById(R.id.name);
                     String name = mTextMessage.getText().toString();
 
-                    mTextMessage = (TextView) findViewById(R.id.description);
-                    String description = mTextMessage.getText().toString();
+//                    mTextMessage = (TextView) findViewById(R.id.description);
+//                    String description = mTextMessage.getText().toString();
                     try {
 
                         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -124,9 +124,9 @@ public class AddCustomStrategyActivity extends AppCompatActivity {
                         strategyName.setNodeValue(name);
                         temp.appendChild(strategyName);
 
-                        Element strategyDescription = doc.createElement ("description");
-                        strategyDescription.setNodeValue(description);
-                        temp.appendChild(strategyDescription);
+//                        Element strategyDescription = doc.createElement ("description");
+//                        strategyDescription.setNodeValue(description);
+//                        temp.appendChild(strategyDescription);
 
                         TransformerFactory transformerFactory = TransformerFactory.newInstance();
                         Transformer transformer = transformerFactory.newTransformer();

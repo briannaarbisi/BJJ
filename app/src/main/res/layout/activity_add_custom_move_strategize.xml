@@ -20,20 +20,20 @@
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/add_custom_strategy_navigation" />
 
-    <EditText
-        android:id="@+id/description"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
-        android:hint="Description (Optional)"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:inputType=
-            "textPersonName|textCapSentences|textAutoCorrect"
-        android:imeOptions="actionDone"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!--<EditText-->
+        <!--android:id="@+id/description"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="88dp"-->
+        <!--android:hint="Description (Optional)"-->
+        <!--android:layout_marginLeft="@dimen/activity_horizontal_margin"-->
+        <!--android:layout_marginStart="@dimen/activity_horizontal_margin"-->
+        <!--android:inputType=-->
+            <!--"textPersonName|textCapSentences|textAutoCorrect"-->
+        <!--android:imeOptions="actionDone"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent" />-->
 
     <EditText
         android:id="@+id/name"
@@ -51,12 +51,24 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/advise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="Select the position that the move belongs to below."
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name" />
+
     <ListView
         android:id="@+id/position_list"
         android:layout_width="380dp"
         android:layout_height="420dp"
         android:groupIndicator="@drawable/settings_selector"
-        app:layout_constraintTop_toBottomOf="@+id/description"
+        app:layout_constraintTop_toBottomOf="@+id/advise"
         android:transcriptMode="alwaysScroll"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"

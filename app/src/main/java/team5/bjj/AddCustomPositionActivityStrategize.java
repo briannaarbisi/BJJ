@@ -93,11 +93,11 @@ public class AddCustomPositionActivityStrategize extends AppCompatActivity {
                             mTextMessage = (TextView) findViewById(R.id.name);
                             String name = mTextMessage.getText().toString();
 
-                            mTextMessage = (TextView) findViewById(R.id.description);
-                            String description = mTextMessage.getText().toString();
+//                            mTextMessage = (TextView) findViewById(R.id.description);
+//                            String description = mTextMessage.getText().toString();
 
                             intent.putExtra("positionName", name);
-                            intent.putExtra("description", description);
+//                            intent.putExtra("description", description);
                             setResult(RESULT_OK, intent);
                             finish();
                             return true;
