@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<assets>
+    <strategy id="Strategy2">
+        <name>Default</name>
+        <description>As simple as it gets.</description>
+
+        <position id="Standing">
+            <move>Single Leg Takedown</move>
+            <move>Double Leg Takedown</move>
+            <move>Guillotine</move>
+            <move>Snap Down</move>
+            <move>Basic Judo Hip Throw</move>
+        </position>
+
+        <position id="Top Guard">
+            <move>Knee Slice</move>
+            <move>Standing Guard Break</move>
+            <move>One Under Pass with Knee Control</move>
+            <move>Double Under Pass</move>
+        </position>
+
+        <position id="Side Control">
+            <move>Head and Arm Choke</move>
+            <move>Arm Bar</move>
+            <move>North-South Choke</move>
+        </position>
+
+        <position id="Full Mount">
+            <move>Gi Choke</move>
+            <move>Arm Bar</move>
+            <move>Ezikiol Choke</move>
+            <move>Kimura</move>
+            <move>Straight Arm Lock</move>
+            <move>Wrist Locks</move>
+        </position>
+    </strategy>
+
+</assets>

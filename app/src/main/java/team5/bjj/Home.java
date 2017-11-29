@@ -128,8 +128,7 @@ public class Home extends AppCompatActivity {
         //XML Parser
         try {
 
-            InputStream is = getAssets().open("strategies.xml");
-
+            InputStream is = getAssets().open("Default.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(is);
@@ -146,7 +145,7 @@ public class Home extends AppCompatActivity {
             transformer.transform(source, result);
             byte []array=bos.toByteArray();
 
-            FileOutputStream fos = openFileOutput("strategies.xml", Context.MODE_PRIVATE);
+            FileOutputStream fos = openFileOutput("Default.xml", Context.MODE_PRIVATE);
             fos.write(array);
             fos.close();
 
