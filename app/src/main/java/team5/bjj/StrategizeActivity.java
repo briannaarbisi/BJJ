@@ -267,6 +267,8 @@ public class StrategizeActivity extends AppCompatActivity {
         if (requestCode == 2) {
             if(resultCode == RESULT_OK) {
 
+
+
                 String strEditText = data.getStringExtra("positionName");
                 listDataHeader.add(strEditText);
                 random.notifyDataSetChanged();
@@ -281,7 +283,14 @@ public class StrategizeActivity extends AppCompatActivity {
                     attr.setValue(strEditText);
                     temp.setAttributeNode(attr);
 
+
                     Element theElement = doc.getDocumentElement();
+
+                    Element temp2 = doc.createElement("move");
+                    templist = new ArrayList<String>();
+                    listDataChild.put(strEditText,templist);
+                    temp.appendChild((Node)temp2);
+                    random.notifyDataSetChanged();
 
                     theElement.normalize();
                     NodeList n = theElement.getElementsByTagName("strategy");

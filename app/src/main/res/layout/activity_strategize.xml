@@ -29,7 +29,7 @@
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/settings_home"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="58dp"
         android:background="?android:attr/windowBackground"
         android:touchscreenBlocksFocus="false"
@@ -43,7 +43,7 @@
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/strategize_navigation_id"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="58dp"
         android:background="?android:attr/windowBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -51,19 +51,23 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:menu="@menu/strategize_navigation" />
+        app:menu="@menu/strategize_navigation">
+
+    </android.support.design.widget.BottomNavigationView>
 
     <ExpandableListView
         android:id="@+id/expandable_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="58dp"
+        android:layout_height="396dp"
         android:groupIndicator="@drawable/settings_selector"
         android:transcriptMode="alwaysScroll"
         app:layout_constraintBottom_toTopOf="@+id/strategize_navigation_id"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settings_home" />
+        app:layout_constraintTop_toBottomOf="@+id/settings_home"
+        app:layout_constraintVertical_bias="0.0" />
+    <!--app:layout_constraintBottom_toTopOf="@+id/strategize_navigation_id"-->
+
 
 </android.support.constraint.ConstraintLayout>
