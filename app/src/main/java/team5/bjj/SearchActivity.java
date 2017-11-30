@@ -83,7 +83,46 @@ public class SearchActivity extends AppCompatActivity {
         changeMenuItemCheckedStateColor(BottomNavigation, "#999999", "#999999");
         BottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        String[] args = {"Hidden", "Single Leg Takedown", "Double Leg Takedown", "Top Guard"};
+        String[] args = {" ", "Americana" ,
+                "Arm Bar" ,
+                "Arm Lock" ,
+                "Baby Bolo" ,
+                "Basic Judo Leg Sweep" ,
+                "Block Control" ,
+                "Bottom Guard" ,
+                "Bottom Guard - Butterfly" ,
+                "Bottom Guard - Open" ,
+                "Bottom Guard - Spider" ,
+                "Bottom Guard - X" ,
+                "Butterfly Sweep" ,
+                "Collar Choke" ,
+                "DeLaRiva Knockdown" ,
+                "Double Leg" ,
+                "Double Under" ,
+                "Ezekiel Choke" ,
+                "Fireman's" ,
+                "Full Mount" ,
+                "Guillotine" ,
+                "Head-and-Arm Choke " ,
+                "High Crotch to Double Leg" ,
+                "Kiss of the Dragon" ,
+                "Knee Slicer" ,
+                "Leg Drag" ,
+                "North-South" ,
+                "North-South Choke" ,
+                "Rear Naked Choke" ,
+                "Scissor" ,
+                "Side Control" ,
+                "Signle Under Knee Control" ,
+                "Single Leg" ,
+                "Single Under Knee Control with Back Step" ,
+                "Sit-Up" ,
+                "Snap-Down" ,
+                "Standing" ,
+                "Standing Guard Break" ,
+                "Top Guard" ,
+                "Triangle Choke" ,
+                "ZZZZZZZZZZZZZ"};
         argsList = new ArrayList<String>();
         Collections.addAll(argsList, args);
         adapter = new ArrayAdapter<String>(
@@ -95,10 +134,46 @@ public class SearchActivity extends AppCompatActivity {
         list = (ListView) findViewById(R.id.position_move_list);
         list.setAdapter(adapter);
 
-        String[] descriptions = new String[] {"\n\nHidden Description",
-                "\n\nThe single leg takedown is a wrestling fundamentals move that is used to take an opponent from the standing position ideally to a bottom position which you have dominance over, most commonly side control. The footwork for the move follows the 'Giant Steps' drill where a lunging motion is performed and the back leg is dragged with a step forward, effectively switching the side of the lunge. This movement is intended to press you forward into the opponents hip while lifting one of his legs off of the mat. The head position is on the inner thigh of the leg you are attacking, with your body pressed tightly against the leg, and the top of the head pressing directly toward the opponent's abdomen as you rise up. This is done to prevent attacks such as the guillotine. Common hand positions are one hand on the back of the knee and one on the calf, or both hands on the calf. The movement is meant to travel forward and cause the opponent to backstep, once this occurs, most commonly a 'bow down' where you perform a back step, turning 90 degrees and dropping your stance level to bring the opponent to the ground." ,
-                "\n\nThe double leg takedown is a wrestling fundamentals move that is used to take an opponent from the standing position to a bottom position, ideally with dominance but can often result in being caught the opponent's guard. The footwork starts with a penetration step where one foot steps past the middle of the opponents stance between their legs, your level is dropped, and this same leg does a 'Giant Step'pressing the knee into the ground and lunging the back leg to the forward position. Simultaneously, your head is pressed into their abdomen, and your hands either push their hands behind their back or clasp the opponents calves. The giant step is pressed forward until the opponent is forced to the ground. If the head is removed from the abdomen and brought to the outside, it must be done only for a short instant, as a guillotine counterattack is almost inevitable.",
-                "\n\nHolding the top position in guard is often referred to as being caught in your opponent's guard. This is considered a neutral position from which you must actively work to gain posture, break the opponent's guard to open and collapse the leg/knee defenses to pass into a more dominant position. Some things to keep in mind are to keep either both hands in the guard or both hands outside, not attempt any submissions, and consider rising to the standing position. Some common moves from top guard are the classical kneeling passes, as well as Standing Guard Break, Sitting Thigh Guard Break, and leg drag passes."};
+        String[] descriptions = new String[] {"\n\nHidden Description","\n\nAmericana Description" ,
+                "\n\nArm Bar Description" ,
+                "\n\nArm Lock Description" ,
+                "\n\nBaby Bolo Description" ,
+                "\n\nBasic Judo Leg Sweep Description" ,
+                "\n\nBlock Control Description" ,
+                "\n\nBottom Guard Description" ,
+                "\n\nBottom Guard - Butterfly Description" ,
+                "\n\nBottom Guard - Open Description" ,
+                "\n\nBottom Guard - Spider Description" ,
+                "\n\nBottom Guard - X Description" ,
+                "\n\nButterfly Sweep Description" ,
+                "\n\nCollar Choke Description" ,
+                "\n\nDeLaRiva Knockdown Description" ,
+                "\n\nDouble Leg Description" ,
+                "\n\nDouble Under Description" ,
+                "\n\nEzekiel Choke Description" ,
+                "\n\nFireman's Description" ,
+                "\n\nFull Mount Description" ,
+                "\n\nGuillotine Description" ,
+                "\n\nHead-and-Arm Choke Description" ,
+                "\n\nHigh Crotch to Double Leg Description" ,
+                "\n\nKiss of the Dragon Description" ,
+                "\n\nKnee Slicer Description" ,
+                "\n\nLeg Drag Description" ,
+                "\n\nNorth-South Description" ,
+                "\n\nNorth-South Choke Description" ,
+                "\n\nRear Naked Choke Description" ,
+                "\n\nScissor Description" ,
+                "\n\nSide Control Description" ,
+                "\n\nSignle Under Knee Control Description" ,
+                "\n\nSingle Leg Description" ,
+                "\n\nSingle Under Knee Control with Back Step Description" ,
+                "\n\nSit-Up Description" ,
+                "\n\nSnap-Down Description" ,
+                "\n\nStanding Description" ,
+                "\n\nStanding Guard Break Description" ,
+                "\n\nTop Guard Descripton" ,
+                "\n\nTriangle Choke Description" ,
+                "Hidden Description"};
 
         descriptionsList = new ArrayList<String>();
         Collections.addAll(descriptionsList, descriptions);
@@ -146,8 +221,14 @@ public class SearchActivity extends AppCompatActivity {
             if(resultCode == RESULT_OK) {
                 String position = data.getStringExtra("positionName");
                 String description = "\n\n"+ data.getStringExtra("description");
+                argsList.remove(argsList.size() -1);
+                descriptionsList.remove(descriptionsList.size() -1);
                 argsList.add(position);
-                descriptionsList.add(description);
+                argsList.add("ZZZZZZZZZZ");
+                Collections.sort(argsList);
+                int positionIndex = argsList.indexOf(position);
+                descriptionsList.add(positionIndex,description);
+                descriptionsList.add("Hidden");
                 adapter.notifyDataSetChanged();
 
             }
