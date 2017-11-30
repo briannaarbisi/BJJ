@@ -150,7 +150,7 @@ public class SearchActivity extends AppCompatActivity {
                 "\n\nDeLaRiva Knockdown Description" ,
                 "\n\nDouble Leg Description" ,
                 "\n\nDouble Under Description" ,
-                "\n\nEzekiel Choke Description" ,
+                "\n\nThe Ezekiel Choke, or Estrangulamento de Ezequiel (in Portuguese) or even Sode Guruma Jime (in Japanese) is a common submission utilized by grapplers in which the attacker uses his own gi/kimono sleeve as leverage to choke his opponent. This choke hold combines the use of the aggressor’s sleeve and the wrist, in a scissoring motion that blocks the opponent’s trachea and/or the carotid arteries. The choke became highly popular in the sport of Brazilian jiu jitsu during the 1990’s as it is one of the few chokes/attacks that a top fighter can safely attempt from inside the guard of his opponent. The Ezekiel choke has many variations, being the “arm in Ezekiel” one of it’s most commonly seen in high level competition." ,
                 "\n\nFireman's Description" ,
                 "\n\nFull Mount Description" ,
                 "\n\nGuillotine Description" ,
