@@ -47,6 +47,7 @@
         </activity>
         <activity
             android:name=".AddCustomMoveActivityStrategize"
+            android:windowSoftInputMode="stateVisible|adjustResize"
             android:label="Add Move"
             android:parentActivityName=".StrategizeActivity">
             <meta-data

@@ -15,4 +15,6 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_add_custom_strategy">Add Custom Strategy</string>
+    <string name="select_the_position_that_the_move_belongs_to_below">Select the position that the move belongs to below.</string>
+    <string name="name">Name</string>
 </resources>

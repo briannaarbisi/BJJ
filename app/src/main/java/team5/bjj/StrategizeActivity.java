@@ -8,10 +8,15 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 import android.util.DisplayMetrics;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
@@ -55,6 +60,7 @@ public class StrategizeActivity extends AppCompatActivity {
     Transformer transformer;
     String fileName;
     List<String> templist;
+    ListView temp;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -164,6 +170,16 @@ public class StrategizeActivity extends AppCompatActivity {
 
         // setting list adapter
         expListView.setAdapter(random);
+
+        /*temp = (ListView) findViewById(R.id.position_list);
+        //tv.setMovementMethod(new ScrollingMovementMethod());
+
+        temp.q;
+        temp.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                return (event.getAction() == MotionEvent.ACTION_MOVE);
+            }
+        });*/
 
 
     }
